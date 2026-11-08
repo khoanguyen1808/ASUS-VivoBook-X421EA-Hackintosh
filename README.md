@@ -1,38 +1,79 @@
-# ASUS VivoBook X421EA / S433EA - OpenCore Hackintosh (macOS Sequoia 15.x)
+<p align="center">
+  <h1 align="center">💻 ASUS VivoBook X421EA / S433EA - OpenCore Hackintosh</h1>
+  <p align="center"><b>Complete OpenCore EFI & Post-Install Toolkit for macOS Sequoia 15.x on Intel 11th Gen Tiger Lake</b></p>
+</p>
 
-[![macOS](https://img.shields.io/badge/macOS-Sequoia%2015.x-blue?logo=apple&logoColor=white)](https://www.apple.com/macos/sequoia/)
-[![OpenCore](https://img.shields.io/badge/OpenCore-1.0.x-success?logo=apple)](https://github.com/acidanthera/OpenCorePkg)
-[![Language](https://img.shields.io/badge/Language-English%20%7C%20Ti%E1%BA%BFng%20Vi%E1%BB%87t-informational)](#-ti%E1%BA%BFng-vi%E1%BB%87t-b%E1%BA%A3n-ti%E1%BA%BFng-vi%E1%BB%87t)
+<p align="center">
+  <a href="README.md"><img src="https://img.shields.io/badge/Language-English-blue?style=for-the-badge&logo=googletranslate&logoColor=white" alt="English" /></a>
+  <a href="README_VI.md"><img src="https://img.shields.io/badge/Ngôn%20ngữ-Tiếng%20Việt-red?style=for-the-badge&logo=googletranslate&logoColor=white" alt="Tiếng Việt" /></a>
+</p>
 
-Complete OpenCore EFI configuration and Post-Install toolkit designed for **ASUS VivoBook (X421EA / S433EA)** running **macOS Sequoia 15.x**.
-
-> 🌐 **Language Switch**: [Click here for Vietnamese Version (Bản Tiếng Việt)](README_VI.md)
+<p align="center">
+  <a href="https://www.apple.com/os/macos/"><img src="https://img.shields.io/badge/macOS-Sequoia%2015.x-black?style=flat-square&logo=apple&logoColor=white" alt="macOS Sequoia" /></a>
+  <a href="https://github.com/acidanthera/OpenCorePkg"><img src="https://img.shields.io/badge/OpenCore-1.0.x-0969da?style=flat-square&logo=apple" alt="OpenCore" /></a>
+  <a href="https://github.com/ChefKissInc/WhateverGreen"><img src="https://img.shields.io/badge/GPU-Iris%20Xe%201536MB%20(QE%2FCI)-success?style=flat-square&logo=intel" alt="Iris Xe" /></a>
+  <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/stargazers"><img src="https://img.shields.io/github/stars/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square&color=yellow" alt="Stars" /></a>
+  <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/network/members"><img src="https://img.shields.io/github/forks/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square&color=orange" alt="Forks" /></a>
+  <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/issues"><img src="https://img.shields.io/github/issues/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square" alt="Issues" /></a>
+</p>
 
 ---
 
-## 💻 Hardware Specifications
+## 🌟 Highlights & Why This Repo?
 
-| Component | Hardware Details | Status | Kext / Patch Applied |
+* ⚡ **Intel Iris Xe Hardware Acceleration (QE/CI)**: Custom configured `WhateverXe` kext + graphics package delivering smooth 1536 MB VRAM acceleration on 11th Gen Tiger Lake.
+* 🛡️ **4-Stage Progressive Bootloader**: Prevents kernel panics during fresh installation with staged profiles.
+* 🤖 **Automation Scripts Included**:
+  * `Switch_EFI_Stage.command`: One-click stage switching directly on the mounted EFI partition.
+  * `Sync_NVMe_EFI_Clean_Windows.command`: Automatically wipes conflicting Windows EFI boot entries, migrates OpenCore to internal NVMe SSD, disables freezing Bluetooth kexts, and blesses OpenCore into UEFI NVRAM.
+* 🚀 **macOS Sequoia 15.x Ready**: Fully configured with `AMFIPass.kext` and `RestrictEvents.kext`.
+
+---
+
+## 💻 Hardware Specifications & Support Status
+
+| Component | Hardware Model | Status | Driver / Patch Applied |
 | :--- | :--- | :---: | :--- |
-| **Model** | ASUS VivoBook X421EA / S433EA | ✅ | MacBookPro16,2 SMBIOS |
-| **Processor** | Intel Core 11th Gen (Tiger Lake) | ✅ | `CpuTscSync.kext` |
-| **iGPU** | Intel Iris Xe Graphics (1536 MB VRAM) | ✅ | `WhateverXe.kext` + WhateverXe Graphics PKG |
-| **Memory** | DDR4 Dual-Channel | ✅ | Native |
-| **Storage** | Micron 2210 NVMe 512GB (`MTFDHBA512QFD`) | ✅ | `NVMeFix.kext` |
-| **Audio** | Realtek ALC256 | ✅ | `AppleALC.kext` + `AsusSMC.kext` (Layout-ID 21/11) |
-| **Wi-Fi** | Intel Wi-Fi 6 AX201 160MHz | ✅ | `itlwm.kext` + **HeliPort** app |
-| **Bluetooth** | Intel AX201 Bluetooth | ⚠️ | `IntelBluetoothFirmware` (disabled during initial install) |
-| **Trackpad** | ASUS I2C Precision Trackpad (`ASUE140C`) | ✅ | `VoodooI2C.kext` + `VoodooI2CHID.kext` |
-| **Keyboard** | PS/2 Keyboard + Fn Hotkeys | ✅ | `VoodooPS2Controller.kext` + `BrightnessKeys.kext` |
-| **Battery & Sensors**| Battery Status, Ambient Light Sensor | ✅ | `SMCBatteryManager`, `SMCLightSensor`, `AsusSMC` |
-| **USB Ports** | Intel USB 3.1 xHCI Controller | ✅ | `USBToolBox.kext` + `UTBMap.kext` |
+| **Model** | ASUS VivoBook X421EA / S433EA | ✅ Working | MacBookPro16,2 SMBIOS |
+| **Processor** | Intel Core 11th Gen (Tiger Lake) | ✅ Working | `CpuTscSync.kext` |
+| **iGPU** | Intel Iris Xe Graphics (1536 MB VRAM) | ✅ Working | `WhateverXe.kext` + WhateverXe Graphics PKG |
+| **Memory** | DDR4 Dual-Channel | ✅ Working | Native |
+| **Storage** | Micron 2210 NVMe 512GB (`MTFDHBA512QFD`) | ✅ Working | `NVMeFix.kext` |
+| **Audio** | Realtek ALC256 (Speakers, Headphones, Mic) | ✅ Working | `AppleALC.kext` + `AsusSMC.kext` (Layout-ID 21/11) |
+| **Wi-Fi** | Intel Wi-Fi 6 AX201 160MHz | ✅ Working | `itlwm.kext` + **HeliPort** app |
+| **Bluetooth** | Intel AX201 Bluetooth | ⚠️ Partial | `IntelBluetoothFirmware` (keep disabled during installation) |
+| **Trackpad** | ASUS I2C Precision Multi-touch (`ASUE140C`) | ✅ Working | `VoodooI2C.kext` + `VoodooI2CHID.kext` + `SSDT-GPIO` |
+| **Keyboard** | PS/2 Keyboard + Function Fn Keys | ✅ Working | `VoodooPS2Controller.kext` + `BrightnessKeys.kext` |
+| **Battery & Sensors**| Battery Indicator, Power Adapter, Ambient Light | ✅ Working | `SMCBatteryManager`, `SMCLightSensor`, `AsusSMC` |
+| **USB Ports** | Intel USB 3.1 xHCI Controller | ✅ Working | `USBToolBox.kext` + `UTBMap.kext` |
+| **Display Brightness**| Internal Backlight Slider & Shortcuts | ✅ Working | `SSDT-PNLF.aml` |
+
+---
+
+## ⚙️ Recommended BIOS Settings
+
+Restart laptop and press `F2` or `Delete` to enter BIOS Setup:
+
+### 🔴 Disable
+* **Fast Boot**
+* **Secure Boot**
+* **Intel Platform Trust Technology (PTT)** *(optional, recommended if dual-booting)*
+* **VMD / Intel RST Storage Controller** *(Must be set to AHCI / NVMe Native Mode)*
+* **Wake on LAN / Network Stack**
+
+### 🟢 Enable
+* **VT-x**
+* **VT-d**
+* **Above 4G Decoding**
+* **USB Legacy Support**
+* **DVMT Pre-Allocated: 64MB or higher**
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-hackintosh/
+ASUS-VivoBook-X421EA-Hackintosh/
 ├── EFI/
 │   ├── BOOT/
 │   │   └── BOOTx64.efi
@@ -65,9 +106,16 @@ hackintosh/
 
 ---
 
-## 🚀 4-Stage Boot & Installation Strategy
+## 🚀 4-Stage Progressive Boot Strategy
 
 Because macOS Sequoia on 11th Gen Tiger Lake requires staged kext loading to prevent installation kernel panics, this EFI uses a **4-stage progressive strategy**:
+
+```mermaid
+flowchart LR
+    A["Stage 1<br/>Core NVMe & Installer"] --> B["Stage 2<br/>Intel AX201 Wi-Fi"]
+    B --> C["Stage 3<br/>Iris Xe 1536MB GPU"]
+    C --> D["Stage 4<br/>Full Trackpad, Audio, Battery"]
+```
 
 ### 🔹 Stage 1: Core NVMe + USB Mouse + Keyboard (Initial Setup)
 * **Config File**: `config-Stage1-Core-NVMe-Mouse-Keyboard.plist`
@@ -87,11 +135,11 @@ Because macOS Sequoia on 11th Gen Tiger Lake requires staged kext loading to pre
 
 ---
 
-## 🧩 ACPI & Kernel Patches (Mấy cái Patch)
+## 🧩 ACPI & Kernel Patches Breakdown
 
 ### 1. ACPI DSDT Hotpatches
-Located in `EFI/OC/config.plist` under `ACPI -> Patch`:
-* **`Fix ASUS S433EA DSDT AE_NOT_FOUND on _SB.PC00.XHCI.RHUB.HS10 -> SS05`**: Prevents ACPI abort error during USB discovery on port HS10/SS05.
+Configured under `ACPI -> Patch` in `config.plist`:
+* **`Fix ASUS S433EA DSDT AE_NOT_FOUND on _SB.PC00.XHCI.RHUB.HS10 -> SS05`**: Prevents ACPI namespace abort error during USB discovery on port HS10/SS05.
 * **`Fix ASUS S433EA DSDT AE_NOT_FOUND on _SB.PC00.XHCI.RHUB.HS14 -> SS06`**: Fixes ACPI namespace lookup failure for HS14/SS06 on ASUS Tiger Lake motherboards.
 
 ### 2. Custom SSDT Tables
@@ -151,7 +199,26 @@ The repository plists include sample `MacBookPro16,2` serial numbers. **Before s
 
 ---
 
-## 👥 Credits & Contributors (Người đóng góp)
+## ❓ FAQ & Troubleshooting
+
+<details>
+<summary><b>1. Stuck at boot on Apple logo or verbose text during install?</b></summary>
+Switch back to <b>Stage 1</b> using <code>./Switch_EFI_Stage.command</code>. Stage 1 turns off GPU acceleration and non-essential kexts so the installer boots without hanging.
+</details>
+
+<details>
+<summary><b>2. Freezes at macOS lockscreen after syncing to NVMe?</b></summary>
+Run <code>./Sync_NVMe_EFI_Clean_Windows.command</code>. It automatically disables Intel Bluetooth kexts (<code>IntelBTPatcher</code>, <code>BlueToolFixup</code>) which cause known lockscreen freezes on Sequoia.
+</details>
+
+<details>
+<summary><b>3. Wi-Fi network list is not showing?</b></summary>
+Make sure you switch to <b>Stage 2</b> or higher, then open the <b>HeliPort</b> app located in <code>Post-Install/HeliPort.dmg</code>. <code>itlwm.kext</code> requires HeliPort to connect to SSIDs.
+</details>
+
+---
+
+## 👥 Credits & Contributors
 
 Special thanks to all developers and open-source contributors who made Hackintosh on 11th Gen Intel possible:
 
@@ -167,3 +234,9 @@ Special thanks to all developers and open-source contributors who made Hackintos
 | **[CorpNewt](https://github.com/corpnewt)** | `GenSMBIOS`, `MountEFI`, `ProperTree`, `SSDTTime` utilities | [GitHub](https://github.com/corpnewt) |
 | **[Dortania](https://dortania.github.io)** | OpenCore Install Guide & documentation | [Dortania Guides](https://dortania.github.io) |
 | **Apple Inc.** | macOS operating system | [Apple](https://www.apple.com) |
+
+---
+
+## ⭐ Star & Support
+
+If this repository helped you run macOS Sequoia on your ASUS VivoBook, please **give it a Star ⭐** to help other Hackintosh users find it!

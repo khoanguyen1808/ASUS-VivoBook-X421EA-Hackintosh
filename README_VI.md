@@ -1,38 +1,79 @@
-# ASUS VivoBook X421EA / S433EA - OpenCore Hackintosh (macOS Sequoia 15.x)
+<p align="center">
+  <h1 align="center">💻 ASUS VivoBook X421EA / S433EA - OpenCore Hackintosh</h1>
+  <p align="center"><b>Bộ cài đặt OpenCore EFI & Công cụ hậu kỳ hoàn chỉnh cho macOS Sequoia 15.x trên Intel Gen 11 Tiger Lake</b></p>
+</p>
 
-[![macOS](https://img.shields.io/badge/macOS-Sequoia%2015.x-blue?logo=apple&logoColor=white)](https://www.apple.com/macos/sequoia/)
-[![OpenCore](https://img.shields.io/badge/OpenCore-1.0.x-success?logo=apple)](https://github.com/acidanthera/OpenCorePkg)
-[![Language](https://img.shields.io/badge/Language-English%20%7C%20Ti%E1%BA%BFng%20Vi%E1%BB%87t-informational)](README.md)
+<p align="center">
+  <a href="README.md"><img src="https://img.shields.io/badge/Language-English-blue?style=for-the-badge&logo=googletranslate&logoColor=white" alt="English" /></a>
+  <a href="README_VI.md"><img src="https://img.shields.io/badge/Ngôn%20ngữ-Tiếng%20Việt-red?style=for-the-badge&logo=googletranslate&logoColor=white" alt="Tiếng Việt" /></a>
+</p>
 
-Bộ cài đặt EFI OpenCore và bộ công cụ hậu kỳ (Post-Install) hoàn chỉnh dành riêng cho **ASUS VivoBook (X421EA / S433EA)** chạy hệ điều hành **macOS Sequoia 15.x**.
-
-> 🌐 **Chuyển đổi ngôn ngữ**: [Xem bản Tiếng Anh (English Version)](README.md)
+<p align="center">
+  <a href="https://www.apple.com/os/macos/"><img src="https://img.shields.io/badge/macOS-Sequoia%2015.x-black?style=flat-square&logo=apple&logoColor=white" alt="macOS Sequoia" /></a>
+  <a href="https://github.com/acidanthera/OpenCorePkg"><img src="https://img.shields.io/badge/OpenCore-1.0.x-0969da?style=flat-square&logo=apple" alt="OpenCore" /></a>
+  <a href="https://github.com/ChefKissInc/WhateverGreen"><img src="https://img.shields.io/badge/GPU-Iris%20Xe%201536MB%20(QE%2FCI)-success?style=flat-square&logo=intel" alt="Iris Xe" /></a>
+  <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/stargazers"><img src="https://img.shields.io/github/stars/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square&color=yellow" alt="Stars" /></a>
+  <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/network/members"><img src="https://img.shields.io/github/forks/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square&color=orange" alt="Forks" /></a>
+  <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/issues"><img src="https://img.shields.io/github/issues/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square" alt="Issues" /></a>
+</p>
 
 ---
 
-## 💻 Cấu hình phần cứng (Hardware Specifications)
+## 🌟 Điểm nổi bật & Lý do chọn bộ EFI này?
+
+* ⚡ **Tăng tốc đồ họa Intel Iris Xe (Full QE/CI)**: Kích hoạt mượt mà 1536 MB VRAM trên chip Intel 11th Gen Tiger Lake nhờ bản vá `WhateverXe` chuyên dụng.
+* 🛡️ **Chiến lược Boot 4 giai đoạn tiến trình**: Ngăn chặn triệt để lỗi Kernel Panic trong quá trình cài đặt mới macOS Sequoia.
+* 🤖 **Tích hợp các tập lệnh tự động hóa cao**:
+  * `Switch_EFI_Stage.command`: Chuyển đổi giai đoạn cấu hình chỉ với 1 cú click trực tiếp trên phân vùng EFI.
+  * `Sync_NVMe_EFI_Clean_Windows.command`: Tự động xóa xung đột bootloader Windows (`EFI/Microsoft`), đồng bộ OpenCore sang SSD NVMe nội bộ, tắt Bluetooth gây đơ màn hình khóa, và nạp OpenCore vào UEFI NVRAM (`bless`).
+* 🚀 **Tối ưu sẵn cho macOS Sequoia 15.x**: Tương thích hoàn toàn với `AMFIPass.kext` và `RestrictEvents.kext`.
+
+---
+
+## 💻 Cấu hình phần cứng & Tình trạng hoạt động
 
 | Thành phần | Chi tiết phần cứng | Tình trạng | Kext / Bản vá (Patch) áp dụng |
 | :--- | :--- | :---: | :--- |
-| **Model** | ASUS VivoBook X421EA / S433EA | ✅ | SMBIOS MacBookPro16,2 |
-| **CPU** | Intel Core Gen 11 (Tiger Lake) | ✅ | `CpuTscSync.kext` |
-| **iGPU** | Intel Iris Xe Graphics (1536 MB VRAM) | ✅ | `WhateverXe.kext` + WhateverXe Graphics PKG |
-| **RAM** | DDR4 Dual-Channel | ✅ | Nhận diện gốc (Native) |
-| **Ổ cứng** | Micron 2210 NVMe 512GB (`MTFDHBA512QFD`) | ✅ | `NVMeFix.kext` |
-| **Audio** | Realtek ALC256 | ✅ | `AppleALC.kext` + `AsusSMC.kext` (Layout-ID 21/11) |
-| **Wi-Fi** | Intel Wi-Fi 6 AX201 160MHz | ✅ | `itlwm.kext` + ứng dụng **HeliPort** |
-| **Bluetooth** | Intel AX201 Bluetooth | ⚠️ | `IntelBluetoothFirmware` (tạm tắt lúc cài đặt ban đầu) |
-| **Trackpad** | ASUS I2C Precision Trackpad (`ASUE140C`) | ✅ | `VoodooI2C.kext` + `VoodooI2CHID.kext` |
-| **Bàn phím** | PS/2 Keyboard + Phím chức năng Fn | ✅ | `VoodooPS2Controller.kext` + `BrightnessKeys.kext` |
-| **Pin & Cảm biến**| Quản lý pin, cảm biến ánh sáng ALS | ✅ | `SMCBatteryManager`, `SMCLightSensor`, `AsusSMC` |
-| **Cổng USB** | Intel USB 3.1 xHCI Controller | ✅ | `USBToolBox.kext` + `UTBMap.kext` |
+| **Model** | ASUS VivoBook X421EA / S433EA | ✅ Hoạt động tốt | SMBIOS MacBookPro16,2 |
+| **CPU** | Intel Core Gen 11 (Tiger Lake) | ✅ Hoạt động tốt | `CpuTscSync.kext` |
+| **iGPU** | Intel Iris Xe Graphics (1536 MB VRAM) | ✅ Hoạt động tốt | `WhateverXe.kext` + WhateverXe Graphics PKG |
+| **RAM** | DDR4 Dual-Channel | ✅ Hoạt động tốt | Nhận diện gốc (Native) |
+| **Ổ cứng** | Micron 2210 NVMe 512GB (`MTFDHBA512QFD`) | ✅ Hoạt động tốt | `NVMeFix.kext` |
+| **Audio** | Realtek ALC256 (Loa ngoài, Tai nghe, Mic) | ✅ Hoạt động tốt | `AppleALC.kext` + `AsusSMC.kext` (Layout-ID 21/11) |
+| **Wi-Fi** | Intel Wi-Fi 6 AX201 160MHz | ✅ Hoạt động tốt | `itlwm.kext` + ứng dụng **HeliPort** |
+| **Bluetooth** | Intel AX201 Bluetooth | ⚠️ Tạm thời tắt | `IntelBluetoothFirmware` (tắt trong lúc cài đặt để tránh đơ máy) |
+| **Trackpad** | ASUS I2C Precision Trackpad (`ASUE140C`) | ✅ Hoạt động tốt | `VoodooI2C.kext` + `VoodooI2CHID.kext` + `SSDT-GPIO` |
+| **Bàn phím** | PS/2 Keyboard + Phím chức năng Fn | ✅ Hoạt động tốt | `VoodooPS2Controller.kext` + `BrightnessKeys.kext` |
+| **Pin & Cảm biến**| Quản lý pin, sạc, cảm biến ánh sáng ALS | ✅ Hoạt động tốt | `SMCBatteryManager`, `SMCLightSensor`, `AsusSMC` |
+| **Cổng USB** | Intel USB 3.1 xHCI Controller | ✅ Hoạt động tốt | `USBToolBox.kext` + `UTBMap.kext` |
+| **Độ sáng màn hình**| Thanh trượt độ sáng & Phím tắt Fn | ✅ Hoạt động tốt | `SSDT-PNLF.aml` |
+
+---
+
+## ⚙️ Cài đặt BIOS khuyến nghị (BIOS Settings)
+
+Khởi động lại máy, bấm liên tục phím `F2` hoặc `Delete` để vào BIOS Setup:
+
+### 🔴 Tắt (Disable)
+* **Fast Boot**
+* **Secure Boot**
+* **Intel Platform Trust Technology (PTT)**
+* **VMD / Intel RST Storage Controller** *(Bắt buộc chuyển sang chế độ AHCI / NVMe Native)*
+* **Wake on LAN / Network Stack**
+
+### 🟢 Bật (Enable)
+* **VT-x**
+* **VT-d**
+* **Above 4G Decoding**
+* **USB Legacy Support**
+* **DVMT Pre-Allocated: 64MB hoặc cao hơn**
 
 ---
 
 ## 📁 Cấu trúc thư mục
 
 ```
-hackintosh/
+ASUS-VivoBook-X421EA-Hackintosh/
 ├── EFI/
 │   ├── BOOT/
 │   │   └── BOOTx64.efi
@@ -65,9 +106,16 @@ hackintosh/
 
 ---
 
-## 🚀 Quy trình boot 4 giai đoạn (4-Stage Boot Strategy)
+## 🚀 Quy trình boot 4 giai đoạn an toàn (4-Stage Boot Strategy)
 
-Do macOS Sequoia trên chip Intel 11th Gen (Tiger Lake) cần các bản vá đặc thù, quy trình được tối ưu hóa thành 4 giai đoạn an toàn:
+Do macOS Sequoia trên chip Intel 11th Gen (Tiger Lake) cần các bản vá đặc thù, quy trình được tối ưu hóa thành 4 giai đoạn tuần tự:
+
+```mermaid
+flowchart LR
+    A["Giai đoạn 1<br/>Cài đặt gốc & NVMe"] --> B["Giai đoạn 2<br/>Wi-Fi AX201"]
+    B --> C["Giai đoạn 3<br/>Đồ họa Iris Xe 1536MB"]
+    C --> D["Giai đoạn 4<br/>Trackpad, Audio, Pin"]
+```
 
 ### 🔹 Giai đoạn 1: Khởi động cơ bản & Cài đặt macOS
 * **File cấu hình**: `config-Stage1-Core-NVMe-Mouse-Keyboard.plist`
@@ -152,6 +200,25 @@ Cấu hình mẫu đang để Serial mặc định của `MacBookPro16,2`. **Tr�
 
 ---
 
+## ❓ Câu hỏi thường gặp & Khắc phục sự cố (FAQ)
+
+<details>
+<summary><b>1. Treo ở logo Apple hoặc dòng chữ Verbose khi đang cài đặt?</b></summary>
+Chuyển lại về <b>Giai đoạn 1</b> bằng script <code>./Switch_EFI_Stage.command</code>. Giai đoạn 1 tắt các kext đồ họa nặng để bộ cài đặt boot mượt mà 100%.
+</details>
+
+<details>
+<summary><b>2. Đơ màn hình khóa macOS sau khi đồng bộ sang ổ NVMe?</b></summary>
+Chạy script <code>./Sync_NVMe_EFI_Clean_Windows.command</code>. Script sẽ tự động tắt kext Bluetooth Intel (<code>IntelBTPatcher</code>, <code>BlueToolFixup</code>) - nguyên nhân chính gây đứng hình ở màn hình Login trên Sequoia.
+</details>
+
+<details>
+<summary><b>3. Không thấy danh sách mạng Wi-Fi quét ra?</b></summary>
+Đảm bảo đã kích hoạt <b>Giai đoạn 2</b> trở lên, sau đó mở ứng dụng <b>HeliPort</b> nằm trong thư mục <code>Post-Install/HeliPort.dmg</code>. Kext <code>itlwm</code> kết nối Wi-Fi thông qua ứng dụng này.
+</details>
+
+---
+
 ## 👥 Danh sách người đóng góp & Bản quyền (Credits & Contributors)
 
 Xin gửi lời cảm ơn chân thành đến các nhà phát triển và cộng đồng mã nguồn mở đã tạo nên các bản vá và công cụ cho Hackintosh:
@@ -168,3 +235,9 @@ Xin gửi lời cảm ơn chân thành đến các nhà phát triển và cộng
 | **[CorpNewt](https://github.com/corpnewt)** | Bộ công cụ `GenSMBIOS`, `MountEFI`, `ProperTree`, `SSDTTime` | [GitHub](https://github.com/corpnewt) |
 | **[Dortania](https://dortania.github.io)** | Tài liệu hướng dẫn OpenCore và các bản vá DSDT | [Dortania Guides](https://dortania.github.io) |
 | **Apple Inc.** | Hệ điều hành macOS | [Apple](https://www.apple.com) |
+
+---
+
+## ⭐ Ủng hộ dự án
+
+Nếu bộ cài đặt EFI này giúp bạn cài đặt và chạy thành công macOS Sequoia trên chiếc ASUS VivoBook, hãy nhấn **Star ⭐** để lan tỏa dự án đến cộng đồng Hackintosh nhé!
