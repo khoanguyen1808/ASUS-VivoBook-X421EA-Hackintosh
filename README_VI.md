@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">💻 ASUS VivoBook X421EA / S433EA - OpenCore Hackintosh</h1>
-  <p align="center"><b>Bộ cài đặt OpenCore EFI & Công cụ hậu kỳ hoàn chỉnh cho macOS Sequoia 15.x trên Intel Gen 11 Tiger Lake</b></p>
+  <p align="center"><b>Bộ công cụ OpenCore EFI & hậu cài đặt hoàn chỉnh cho macOS Sequoia 15.x trên Intel Gen 11 Tiger Lake</b></p>
 </p>
 
 <p align="center">
@@ -9,68 +9,64 @@
 </p>
 
 <p align="center">
-  <a href="https://www.apple.com/os/macos/"><img src="https://img.shields.io/badge/macOS-Sequoia%2015.x-black?style=flat-square&logo=apple&logoColor=white" alt="macOS Sequoia" /></a>
+  <a href="https://swcdn.apple.com/content/downloads/31/10/142-50013-A_0GMSQ8FVZX/kpmee5466o6dmojjdqw34x6ckj6b332of6/InstallAssistant.pkg"><img src="https://img.shields.io/badge/macOS-Sequoia%2015.x-black?style=flat-square&logo=apple&logoColor=white" alt="macOS Sequoia" /></a>
   <a href="https://github.com/acidanthera/OpenCorePkg"><img src="https://img.shields.io/badge/OpenCore-1.0.x-0969da?style=flat-square&logo=apple" alt="OpenCore" /></a>
   <a href="https://github.com/ChefKissInc/WhateverGreen"><img src="https://img.shields.io/badge/GPU-Iris%20Xe%201536MB%20(QE%2FCI)-success?style=flat-square&logo=intel" alt="Iris Xe" /></a>
-  <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/stargazers"><img src="https://img.shields.io/github/stars/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square&color=yellow" alt="Stars" /></a>
-  <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/network/members"><img src="https://img.shields.io/github/forks/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square&color=orange" alt="Forks" /></a>
-  <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/issues"><img src="https://img.shields.io/github/issues/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square" alt="Issues" /></a>
 </p>
 
 ---
 
 ## 🌟 Điểm nổi bật & Lý do chọn bộ EFI này?
 
-* ⚡ **Tăng tốc đồ họa Intel Iris Xe (Full QE/CI)**: Kích hoạt mượt mà 1536 MB VRAM trên chip Intel 11th Gen Tiger Lake nhờ bản vá `WhateverXe` chuyên dụng.
-* 🛡️ **Chiến lược Boot 4 giai đoạn tiến trình**: Ngăn chặn triệt để lỗi Kernel Panic trong quá trình cài đặt mới macOS Sequoia.
-* 🤖 **Tích hợp các tập lệnh tự động hóa cao**:
-  * `Switch_EFI_Stage.command`: Chuyển đổi giai đoạn cấu hình chỉ với 1 cú click trực tiếp trên phân vùng EFI.
-  * `Sync_NVMe_EFI_Clean_Windows.command`: Tự động xóa xung đột bootloader Windows (`EFI/Microsoft`), đồng bộ OpenCore sang SSD NVMe nội bộ, tắt Bluetooth gây đơ màn hình khóa, và nạp OpenCore vào UEFI NVRAM (`bless`).
-* 🚀 **Tối ưu sẵn cho macOS Sequoia 15.x**: Tương thích hoàn toàn với `AMFIPass.kext` và `RestrictEvents.kext`.
+* ⚡ **Tăng tốc phần cứng Intel Iris Xe (QE/CI)**: Kext `WhateverXe` được cấu hình tùy chỉnh cùng gói đồ họa, mang lại khả năng tăng tốc mượt mà với 1536 MB VRAM trên nền tảng Tiger Lake Gen 11.
+* 🛡️ **Bootloader tiến trình 4 giai đoạn**: Sử dụng các cấu hình theo từng giai đoạn để ngăn kernel panic khi cài đặt mới.
+* 🤖 **Tích hợp tập lệnh tự động hóa**:
+  * `Switch_EFI_Stage.command`: Chuyển giai đoạn chỉ với một lần chạy trên phân vùng EFI đã mount.
+  * `Sync_NVMe_EFI_Clean_Windows.command`: Tự động xóa các mục khởi động Windows EFI xung đột, chuyển OpenCore sang SSD NVMe nội bộ, tắt các kext Bluetooth gây treo và đăng ký OpenCore vào UEFI.
+* 🚀 **Sẵn sàng cho macOS Sequoia 15.x**: Được cấu hình với `AMFIPass.kext` và `RestrictEvents.kext`.
 
 ---
 
-## 💻 Cấu hình phần cứng & Tình trạng hoạt động
+## 💻 Thông số phần cứng & tình trạng hỗ trợ
 
-| Thành phần | Chi tiết phần cứng | Tình trạng | Kext / Bản vá (Patch) áp dụng |
+| Thành phần | Phần cứng | Tình trạng | Driver / Bản vá áp dụng |
 | :--- | :--- | :---: | :--- |
-| **Model** | ASUS VivoBook X421EA / S433EA | ✅ Hoạt động tốt | SMBIOS MacBookPro16,2 |
-| **CPU** | Intel Core Gen 11 (Tiger Lake) | ✅ Hoạt động tốt | `CpuTscSync.kext` |
-| **iGPU** | Intel Iris Xe Graphics (1536 MB VRAM) | ✅ Hoạt động tốt | `WhateverXe.kext` + WhateverXe Graphics PKG |
-| **RAM** | DDR4 Dual-Channel | ✅ Hoạt động tốt | Nhận diện gốc (Native) |
-| **Ổ cứng** | Micron 2210 NVMe 512GB (`MTFDHBA512QFD`) | ✅ Hoạt động tốt | `NVMeFix.kext` |
-| **Audio** | Realtek ALC256 (Loa ngoài, Tai nghe, Mic) | ✅ Hoạt động tốt | `AppleALC.kext` + `AsusSMC.kext` (Layout-ID 21/11) |
-| **Wi-Fi** | Intel Wi-Fi 6 AX201 160MHz | ✅ Hoạt động tốt | `itlwm.kext` + ứng dụng **HeliPort** |
-| **Bluetooth** | Intel AX201 Bluetooth | ⚠️ Tạm thời tắt | `IntelBluetoothFirmware` (tắt trong lúc cài đặt để tránh đơ máy) |
-| **Trackpad** | ASUS I2C Precision Trackpad (`ASUE140C`) | ✅ Hoạt động tốt | `VoodooI2C.kext` + `VoodooI2CHID.kext` + `SSDT-GPIO` |
-| **Bàn phím** | PS/2 Keyboard + Phím chức năng Fn | ✅ Hoạt động tốt | `VoodooPS2Controller.kext` + `BrightnessKeys.kext` |
-| **Pin & Cảm biến**| Quản lý pin, sạc, cảm biến ánh sáng ALS | ✅ Hoạt động tốt | `SMCBatteryManager`, `SMCLightSensor`, `AsusSMC` |
-| **Cổng USB** | Intel USB 3.1 xHCI Controller | ✅ Hoạt động tốt | `USBToolBox.kext` + `UTBMap.kext` |
-| **Độ sáng màn hình**| Thanh trượt độ sáng & Phím tắt Fn | ✅ Hoạt động tốt | `SSDT-PNLF.aml` |
+| **Model** | ASUS VivoBook X421EA / S433EA | ✅ Hoạt động | SMBIOS MacBookPro16,2 |
+| **Bộ xử lý** | Intel Core Gen 11 (Tiger Lake) | ✅ Hoạt động | `CpuTscSync.kext` |
+| **iGPU** | Intel Iris Xe Graphics (1536 MB VRAM) | ✅ Hoạt động | `WhateverXe.kext` + gói WhateverXe Graphics |
+| **Bộ nhớ** | DDR4 Dual-Channel | ✅ Hoạt động | Nhận diện gốc |
+| **Ổ cứng** | Micron 2210 NVMe 512GB (`MTFDHBA512QFD`) | ✅ Hoạt động | `NVMeFix.kext` |
+| **Âm thanh** | Realtek ALC256 (Loa, tai nghe, mic) | ✅ Hoạt động | `AppleALC.kext` + `AsusSMC.kext` (Layout-ID 21/11) |
+| **Wi-Fi** | Intel Wi-Fi 6 AX201 160MHz | ✅ Hoạt động | `itlwm.kext` + ứng dụng **HeliPort** |
+| **Bluetooth** | Intel AX201 Bluetooth | ⚠️ Một phần | `IntelBluetoothFirmware` (nên tắt khi cài đặt; có thể gây treo ở màn hình khóa nên không khuyến nghị bật) |
+| **Trackpad** | ASUS I2C Precision Multi-touch (`ASUE140C`) | ✅ Hoạt động | `VoodooI2C.kext` + `VoodooI2CHID.kext` + `SSDT-GPIO` |
+| **Bàn phím** | Bàn phím PS/2 + phím chức năng Fn | ✅ Hoạt động | `VoodooPS2Controller.kext` + `BrightnessKeys.kext` |
+| **Pin & cảm biến** | Chỉ báo pin, bộ sạc, cảm biến ánh sáng môi trường | ✅ Hoạt động | `SMCBatteryManager`, `SMCLightSensor`, `AsusSMC` |
+| **Cổng USB** | Intel USB 3.1 xHCI Controller | ✅ Hoạt động | `USBToolBox.kext` + `UTBMap.kext` |
+| **Độ sáng màn hình** | Thanh trượt đèn nền tích hợp & phím tắt | ✅ Hoạt động | `SSDT-PNLF.aml` |
 
 ---
 
-## ⚙️ Cài đặt BIOS khuyến nghị (BIOS Settings)
+## ⚙️ Cài đặt BIOS khuyến nghị
 
-Khởi động lại máy, bấm liên tục phím `F2` hoặc `Delete` để vào BIOS Setup:
+Khởi động lại laptop và nhấn `F2` hoặc `Delete` để vào BIOS Setup:
 
 ### 🔴 Tắt (Disable)
 * **Fast Boot**
+* **Vt-d**
 * **Secure Boot**
-* **Intel Platform Trust Technology (PTT)**
-* **VMD / Intel RST Storage Controller** *(Bắt buộc chuyển sang chế độ AHCI / NVMe Native)*
+* **Intel Platform Trust Technology (PTT)** *(tùy chọn, khuyến nghị nếu dùng dual-boot)*
+* **VMD / Intel RST Storage Controller** *(phải chuyển sang AHCI / NVMe Native Mode)*
 * **Wake on LAN / Network Stack**
 
 ### 🟢 Bật (Enable)
-* **VT-x**
-* **VT-d**
 * **Above 4G Decoding**
 * **USB Legacy Support**
 * **DVMT Pre-Allocated: 64MB hoặc cao hơn**
 
 ---
 
-## 📁 Cấu trúc thư mục
+## 📁 Cấu trúc repository
 
 ```
 ASUS-VivoBook-X421EA-Hackintosh/
@@ -78,121 +74,120 @@ ASUS-VivoBook-X421EA-Hackintosh/
 │   ├── BOOT/
 │   │   └── BOOTx64.efi
 │   └── OC/
-│       ├── ACPI/                         # Các bản vá SSDT cho Tiger Lake
+│       ├── ACPI/                         # Các bản vá SSDT tùy chỉnh cho Tiger Lake
 │       ├── Drivers/                      # OpenRuntime, HfsPlus, OpenCanopy...
-│       ├── Kexts/                        # Bộ Kext hoàn chỉnh tương thích Sequoia
+│       ├── Kexts/                        # Bộ kext đã xác minh cho Sequoia
 │       ├── Tools/
-│       ├── config.plist                  # Cấu hình OpenCore đang chạy
+│       ├── config.plist                  # Cấu hình OpenCore đang dùng
 │       ├── config-Stage1-Core-NVMe-Mouse-Keyboard.plist
 │       ├── config-Stage2-WiFi.plist
 │       ├── config-Stage3-GPU-IrisXe.plist
 │       └── config-Stage4-Full-Trackpad-Audio-Battery.plist
 ├── Post-Install/
-│   ├── HeliPort.dmg                      # Ứng dụng điều khiển Wi-Fi cho itlwm
+│   ├── HeliPort.dmg                      # Ứng dụng quản lý Wi-Fi trên thanh menu cho itlwm
 │   └── WhateverXe-Graphics/
-│       └── WhateverXe-Graphics-0.3.2.pkg # Gói cài đặt tăng tốc đồ họa Iris Xe
+│       └── WhateverXe-Graphics-0.3.2.pkg # Gói driver tăng tốc Iris Xe
 ├── Tools/
-│   ├── GenSMBIOS-master/                 # Sinh Serial, MLB, UUID mới
-│   ├── MountEFI-master/                  # Mount nhanh phân vùng EFI
-│   ├── ProperTree-master/                # Trình chỉnh sửa plist chuẩn OpenCore
-│   ├── SSDTTime-master/                  # Dump DSDT & tạo SSDT chuẩn theo máy
-│   ├── macrecovery/                      # Tải bộ cài macOS gốc từ Apple
-│   ├── ocvalidate                        # Kiểm tra tính hợp lệ của config.plist
-│   └── USBToolBox_Windows.exe            # Map cổng USB trực tiếp trên Windows
-├── Switch_EFI_Stage.command              # Script chuyển giai đoạn cấu hình trực tiếp
-├── Sync_NVMe_EFI_Clean_Windows.command   # Script đồng bộ sang ổ NVMe và dọn dẹp Windows EFI
-└── Hardware_Specs.txt                    # Toàn bộ thông số phần cứng dump chi tiết
+│   ├── GenSMBIOS-master/                 # Tạo Serial, MLB và UUID mới
+│   ├── MountEFI-master/                  # Mount phân vùng EFI bằng một lần chạy
+│   ├── ProperTree-master/                # Trình chỉnh sửa plist tương thích OpenCore
+│   ├── SSDTTime-master/                  # Dump DSDT và tạo SSDT tùy chỉnh
+│   ├── macrecovery/                      # Tải bộ cài macOS chính thức
+│   ├── ocvalidate                        # Kiểm tra cú pháp config.plist
+│   └── USBToolBox_Windows.exe            # Map cổng USB trên Windows
+├── Switch_EFI_Stage.command              # Chuyển cấu hình giai đoạn đang dùng trên EFI
+├── Sync_NVMe_EFI_Clean_Windows.command   # Đồng bộ OpenCore sang NVMe & xử lý xung đột Windows
+└── Hardware_Specs.txt                    # Bản dump PnP đầy đủ của ASUS X421EA
 ```
 
 ---
 
-## 🚀 Quy trình boot 4 giai đoạn an toàn (4-Stage Boot Strategy)
+## 🚀 Chiến lược boot tiến trình 4 giai đoạn
 
-Do macOS Sequoia trên chip Intel 11th Gen (Tiger Lake) cần các bản vá đặc thù, quy trình được tối ưu hóa thành 4 giai đoạn tuần tự:
+Do macOS Sequoia trên Intel Gen 11 Tiger Lake cần nạp kext theo từng giai đoạn để tránh kernel panic khi cài đặt, bộ EFI này sử dụng quy trình tiến trình **4 giai đoạn**:
 
 ```mermaid
 flowchart LR
-    A["Giai đoạn 1<br/>Cài đặt gốc & NVMe"] --> B["Giai đoạn 2<br/>Wi-Fi AX201"]
-    B --> C["Giai đoạn 3<br/>Đồ họa Iris Xe 1536MB"]
-    C --> D["Giai đoạn 4<br/>Trackpad, Audio, Pin"]
+    A["Giai đoạn 1<br/>NVMe cơ bản & bộ cài"] --> B["Giai đoạn 2<br/>Wi-Fi Intel AX201"]
+    B --> C["Giai đoạn 3<br/>GPU Iris Xe 1536MB"]
+    C --> D["Giai đoạn 4<br/>Đầy đủ Trackpad, Audio, Pin"]
 ```
 
-### 🔹 Giai đoạn 1: Khởi động cơ bản & Cài đặt macOS
+### 🔹 Giai đoạn 1: NVMe cơ bản + chuột USB + bàn phím (Thiết lập ban đầu)
 * **File cấu hình**: `config-Stage1-Core-NVMe-Mouse-Keyboard.plist`
-* **Tính năng**: Nhận diện SSD NVMe Micron 2210, bàn phím PS/2, chuột USB ngoài. Tắt toàn bộ kext đồ họa, Wi-Fi và I2C để bộ cài chạy ổn định 100% không bị kernel panic.
+* **Tính năng**: Nhận diện SSD Micron 2210 NVMe, bàn phím PS/2 và chuột USB ngoài. Wi-Fi, tăng tốc GPU và cảm ứng I2C được tắt để đảm bảo ổn định trong quá trình cài đặt macOS.
 
-### 🔹 Giai đoạn 2: Kích hoạt Wi-Fi Intel AX201
+### 🔹 Giai đoạn 2: Wi-Fi Intel AX201
 * **File cấu hình**: `config-Stage2-WiFi.plist`
-* **Tính năng**: Kích hoạt `itlwm.kext`. Cài đặt ứng dụng **HeliPort** (từ `Post-Install/HeliPort.dmg`) để kết nối mạng Wi-Fi.
+* **Tính năng**: Bật `itlwm.kext`. Cài ứng dụng **HeliPort** (trong `Post-Install/HeliPort.dmg`) để kết nối mạng Wi-Fi.
 
-### 🔹 Giai đoạn 3: Kích hoạt GPU Intel Iris Xe
+### 🔹 Giai đoạn 3: Đồ họa Intel Iris Xe
 * **File cấu hình**: `config-Stage3-GPU-IrisXe.plist`
-* **Tính năng**: Kích hoạt `WhateverXe.kext`. Cài đặt `WhateverXe-Graphics-0.3.2.pkg` (từ `Post-Install/WhateverXe-Graphics/`) để kích hoạt tăng tốc đồ họa phần cứng Full QE/CI (1536 MB VRAM).
+* **Tính năng**: Bật `WhateverXe.kext`. Cài `WhateverXe-Graphics-0.3.2.pkg` (trong `Post-Install/WhateverXe-Graphics/`) để bật tăng tốc phần cứng Full QE/CI (1536 MB VRAM).
 
-### 🔹 Giai đoạn 4: Hoàn thiện toàn bộ hệ thống
+### 🔹 Giai đoạn 4: Đầy đủ tính năng
 * **File cấu hình**: `config-Stage4-Full-Trackpad-Audio-Battery.plist`
-* **Tính năng**: Kích hoạt Trackpad cảm ứng đa điểm (`VoodooI2C` + `VoodooI2CHID`), Âm thanh ALC256 (`AppleALC`), Quản lý pin & phím Fn (`AsusSMC`, `SMCBatteryManager`).
+* **Tính năng**: Trackpad I2C đa điểm (`VoodooI2C` + `VoodooI2CHID`), âm thanh Realtek ALC256 (`AppleALC`), quản lý pin (`AsusSMC`, `SMCBatteryManager`) và phím tắt độ sáng Fn.
 
 ---
 
-## 🧩 Chi tiết các bản vá ACPI & Kernel (Mấy cái Patch)
+## 🧩 Chi tiết bản vá ACPI & Kernel
 
 ### 1. ACPI DSDT Hotpatches
-Được cấu hình trong `EFI/OC/config.plist` tại mục `ACPI -> Patch`:
-* **`Fix ASUS S433EA DSDT AE_NOT_FOUND on _SB.PC00.XHCI.RHUB.HS10 -> SS05`**: Sửa lỗi dừng ACPI khi hệ thống quét cổng USB HS10/SS05.
-* **`Fix ASUS S433EA DSDT AE_NOT_FOUND on _SB.PC00.XHCI.RHUB.HS14 -> SS06`**: Khắc phục lỗi thiếu namespace ACPI trên bo mạch chủ ASUS Tiger Lake cho cổng HS14/SS06.
+Được cấu hình tại `ACPI -> Patch` trong `config.plist`:
+* **`Fix ASUS S433EA DSDT AE_NOT_FOUND on _SB.PC00.XHCI.RHUB.HS10 -> SS05`**: Ngăn lỗi dừng namespace ACPI khi dò cổng USB HS10/SS05.
+* **`Fix ASUS S433EA DSDT AE_NOT_FOUND on _SB.PC00.XHCI.RHUB.HS14 -> SS06`**: Sửa lỗi tra cứu namespace ACPI cho HS14/SS06 trên bo mạch ASUS Tiger Lake.
 
 ### 2. Các bảng SSDT tùy chỉnh
-Nằm trong thư mục `EFI/OC/ACPI/`:
-* **`SSDT-ALS0.aml`**: Tạo thiết bị Cảm biến ánh sáng giả lập (Ambient Light Sensor) để quản lý độ sáng và Sleep.
-* **`SSDT-AWAC.aml`**: Vô hiệu hóa AWAC và ép sử dụng đồng hồ RTC truyền thống trên Intel Gen 10/11.
-* **`SSDT-EC-USBX.aml`**: Giả lập bộ điều khiển nhúng (`EC`) và định nghĩa nguồn cấp USB cho macOS Sequoia.
-* **`SSDT-GPIO.aml`**: Kích hoạt ngắt chân GPIO của Intel Tiger Lake để Trackpad I2C hoạt động mượt mà.
-* **`SSDT-PLUG.aml`**: Kích hoạt tính năng quản lý năng lượng CPU gốc (`X86PlatformPlugin`).
-* **`SSDT-PMC.aml`**: Khôi phục khả năng ghi NVRAM gốc cho chipset Intel 400/500-series.
-* **`SSDT-PNLF.aml`**: Vá thanh điều khiển độ sáng màn hình cho iGPU Intel Iris Xe.
-* **`SSDT-RHUB.aml`**: Reset trạng thái bộ điều khiển USB RHUB để nhận diện cổng chính xác.
-* **`SSDT-USBX.aml`**: Bổ sung thông số dòng điện USB (`kUSBSleepPowerSupply`, `kUSBWakePowerSupply`).
+Nằm trong `EFI/OC/ACPI/`:
+* **`SSDT-ALS0.aml`**: Thêm thiết bị cảm biến ánh sáng môi trường giả lập để quản lý đèn nền và chế độ ngủ.
+* **`SSDT-AWAC.aml`**: Tắt đồng hồ AWAC và buộc dùng Legacy RTC trên nền tảng Intel Gen 10/11.
+* **`SSDT-EC-USBX.aml`**: Tiêm bộ điều khiển nhúng giả (`EC`) và khai báo thuộc tính nguồn USB cho Sequoia.
+* **`SSDT-GPIO.aml`**: Bật chân bộ điều khiển ngắt GPIO Intel Tiger Lake cho thao tác cử chỉ trackpad I2C gốc.
+* **`SSDT-PLUG.aml`**: Khắc phục quản lý năng lượng CPU (`X86PlatformPlugin`).
+* **`SSDT-PMC.aml`**: Khôi phục hỗ trợ NVRAM gốc trên chipset Intel dòng 400/500.
+* **`SSDT-PNLF.aml`**: Sửa điều khiển đèn nền màn hình tích hợp Intel Iris Xe trên Tiger Lake.
+* **`SSDT-RHUB.aml`**: Đặt lại trạng thái bộ điều khiển USB RHUB để ánh xạ cổng tùy chỉnh.
+* **`SSDT-USBX.aml`**: Tiêm thông số nguồn USB (`kUSBSleepPowerSupply`, `kUSBWakePowerSupply`).
 
-### 3. Kexts và Kernel Arguments quan trọng
-* **`WhateverXe.kext`**: Trình điều khiển đồ họa Intel Iris Xe dành cho macOS.
-* **`AMFIPass.kext`**: Cho phép vượt qua kiểm tra AMFI trên macOS Sequoia mà không cần tắt hoàn toàn SIP.
-* **`RestrictEvents.kext`**: Tinh chỉnh chuỗi hiển thị phần cứng và bộ nhớ trong phần Giới thiệu máy tính.
-* **`NVMeFix.kext`**: Tối ưu hóa chuyển trạng thái năng lượng (APST) cho ổ cứng SSD Micron 2210.
-* **`ECEnabler.kext`**: Đọc trạng thái pin trên các trường ACPI có độ dài phi chuẩn (> 8 bits).
+### 3. Kext và tham số Kernel quan trọng
+* **`WhateverXe.kext`**: Bản chuyển đổi driver đồ họa Intel Iris Xe được tùy chỉnh cho macOS.
+* **`AMFIPass.kext`**: Cho phép vượt qua AMFI trên macOS Sequoia mà không cần tắt hoàn toàn SIP.
+* **`RestrictEvents.kext`**: Sửa thông tin bộ nhớ và chuỗi model trong giao diện macOS hiện đại.
+* **`NVMeFix.kext`**: Tăng cường quản lý năng lượng và chuyển trạng thái nguồn tự động trên SSD Micron NVMe.
+* **`ECEnabler.kext`**: Đọc trạng thái pin qua các trường ACPI có độ dài không chuẩn (> 8 bit).
 
 ---
 
-## 🛠 Hướng dẫn sử dụng tập lệnh tự động
+## 🛠 Công cụ tự động hóa
 
-### 1. Chuyển đổi giai đoạn cấu hình (`Switch_EFI_Stage.command`)
-Sau khi mount phân vùng EFI (`/Volumes/EFI`), mở Terminal và chạy:
+### 1. Script chuyển giai đoạn (`Switch_EFI_Stage.command`)
+Chuyển nhanh file cấu hình đang dùng trên `/Volumes/EFI`:
 ```bash
 ./Switch_EFI_Stage.command
 ```
-Nhập `1`, `2`, `3` hoặc `4`. Script sẽ thay thế `config.plist` và kiểm tra tính hợp lệ bằng `ocvalidate`.
+Chọn `1`, `2`, `3` hoặc `4`. Script thay thế `config.plist` và kiểm tra bằng `ocvalidate`.
 
-### 2. Đồng bộ OpenCore vào ổ SSD trong máy (`Sync_NVMe_EFI_Clean_Windows.command`)
-Sau khi cài đặt xong macOS và vào được Desktop:
+### 2. Script chuyển EFI sang NVMe (`Sync_NVMe_EFI_Clean_Windows.command`)
+Sau khi cài đặt macOS hoàn tất:
 ```bash
 ./Sync_NVMe_EFI_Clean_Windows.command
 ```
-Các bước script tự động thực hiện:
+Script thực hiện:
 1. Mount phân vùng EFI của ổ NVMe nội bộ.
-2. Sao lưu và xóa thư mục `EFI/Microsoft` cũ sang `~/Windows_EFI_Backup` để tránh xung đột bootloader.
-3. Đồng bộ toàn bộ `EFI/BOOT` và `EFI/OC` sang ổ NVMe.
-4. Tắt các kext Bluetooth gây treo màn hình khóa.
-5. Đăng ký OpenCore vào UEFI NVRAM (`bless`).
+2. Sao lưu và xóa thư mục `EFI/Microsoft` xung đột sang `~/Windows_EFI_Backup`.
+3. Sao chép `EFI/BOOT` và `EFI/OC` của OpenCore sang ổ NVMe.
+4. Tắt các kext Bluetooth xung đột trong quá trình khởi động.
+5. Đăng ký OpenCore vào UEFI NVRAM bằng `bless`.
 
 ---
 
 ## ⚠️ Lưu ý quan trọng về SMBIOS
 
-Cấu hình mẫu đang để Serial mặc định của `MacBookPro16,2`. **Trước khi đăng nhập Apple ID / iCloud / iMessage**, bạn cần tạo bộ Serial riêng:
+Các plist trong repository có chứa số serial mẫu `MacBookPro16,2`. **Trước khi đăng nhập Apple ID / iCloud / iMessage**, hãy tạo SMBIOS riêng:
 1. Chạy `Tools/GenSMBIOS-master/GenSMBIOS.command`.
-2. Chọn loại Model: **`MacBookPro16,2`**.
-3. Dùng **ProperTree** mở `EFI/OC/config.plist`, tìm đến mục `PlatformInfo` -> `Generic`.
-4. Cập nhật các giá trị mới sinh:
+2. Chọn model: **`MacBookPro16,2`**.
+3. Mở `EFI/OC/config.plist` bằng **ProperTree** và cập nhật tại `PlatformInfo -> Generic`:
    * `SystemProductName`
    * `SystemSerialNumber`
    * `MLB`
@@ -200,44 +195,44 @@ Cấu hình mẫu đang để Serial mặc định của `MacBookPro16,2`. **Tr�
 
 ---
 
-## ❓ Câu hỏi thường gặp & Khắc phục sự cố (FAQ)
+## ❓ FAQ & Khắc phục sự cố
 
 <details>
-<summary><b>1. Treo ở logo Apple hoặc dòng chữ Verbose khi đang cài đặt?</b></summary>
-Chuyển lại về <b>Giai đoạn 1</b> bằng script <code>./Switch_EFI_Stage.command</code>. Giai đoạn 1 tắt các kext đồ họa nặng để bộ cài đặt boot mượt mà 100%.
+<summary><b>1. Bị treo ở logo Apple hoặc dòng verbose khi cài đặt?</b></summary>
+Chuyển về <b>Giai đoạn 1</b> bằng <code>./Switch_EFI_Stage.command</code>. Giai đoạn 1 tắt tăng tốc GPU và các kext không thiết yếu để bộ cài khởi động mà không bị treo.
 </details>
 
 <details>
-<summary><b>2. Đơ màn hình khóa macOS sau khi đồng bộ sang ổ NVMe?</b></summary>
-Chạy script <code>./Sync_NVMe_EFI_Clean_Windows.command</code>. Script sẽ tự động tắt kext Bluetooth Intel (<code>IntelBTPatcher</code>, <code>BlueToolFixup</code>) - nguyên nhân chính gây đứng hình ở màn hình Login trên Sequoia.
+<summary><b>2. Bị treo ở màn hình khóa macOS sau khi đồng bộ sang NVMe?</b></summary>
+Chạy <code>./Sync_NVMe_EFI_Clean_Windows.command</code>. Script tự động tắt các kext Bluetooth Intel (<code>IntelBTPatcher</code>, <code>BlueToolFixup</code>) vốn là nguyên nhân đã biết gây treo màn hình khóa.
 </details>
 
 <details>
-<summary><b>3. Không thấy danh sách mạng Wi-Fi quét ra?</b></summary>
-Đảm bảo đã kích hoạt <b>Giai đoạn 2</b> trở lên, sau đó mở ứng dụng <b>HeliPort</b> nằm trong thư mục <code>Post-Install/HeliPort.dmg</code>. Kext <code>itlwm</code> kết nối Wi-Fi thông qua ứng dụng này.
+<summary><b>3. Không thấy danh sách mạng Wi-Fi?</b></summary>
+Đảm bảo đã chuyển sang <b>Giai đoạn 2</b> trở lên, sau đó mở ứng dụng <b>HeliPort</b> trong <code>Post-Install/HeliPort.dmg</code>. <code>itlwm.kext</code> cần HeliPort để kết nối với mạng Wi-Fi.
 </details>
 
 ---
 
-## 👥 Danh sách người đóng góp & Bản quyền (Credits & Contributors)
+## 👥 Cảm ơn & Người đóng góp
 
-Xin gửi lời cảm ơn chân thành đến các nhà phát triển và cộng đồng mã nguồn mở đã tạo nên các bản vá và công cụ cho Hackintosh:
+Xin chân thành cảm ơn các nhà phát triển và cộng đồng mã nguồn mở đã giúp Hackintosh trên Intel Gen 11 trở nên khả thi:
 
 | Tác giả / Dự án | Thành phần đóng góp | Đường dẫn |
 | :--- | :--- | :--- |
 | **[Acidanthera](https://github.com/acidanthera)** | OpenCorePkg, Lilu, AppleALC, VirtualSMC, CpuTscSync, NVMeFix, RestrictEvents, BrightnessKeys | [GitHub](https://github.com/acidanthera) |
-| **[OpenIntelWireless](https://github.com/OpenIntelWireless)** | `itlwm.kext` (Driver Wi-Fi Intel) và ứng dụng `HeliPort` | [GitHub](https://github.com/OpenIntelWireless) |
-| **[VoodooI2C Team](https://github.com/VoodooI2C)** (Alexandred, hieplpvip, cholonam, benvs) | `VoodooI2C.kext` & `VoodooI2CHID.kext` (Driver bàn rê cảm ứng I2C) | [GitHub](https://github.com/VoodooI2C) |
-| **[ChefKissInc](https://github.com/ChefKissInc)** | `WhateverXe.kext` & bộ cài WhateverXe Graphics (Driver Iris Xe) | [GitHub](https://github.com/ChefKissInc) |
-| **[1Revenger1](https://github.com/1Revenger1)** | `ECEnabler.kext` (Bản vá đọc Pin từ Embedded Controller) | [GitHub](https://github.com/1Revenger1/ECEnabler) |
-| **[dhinakg](https://github.com/dhinakg)** | `USBToolBox` driver và công cụ map cổng USB | [GitHub](https://github.com/dhinakg/USBToolBox) |
-| **[blusseau](https://github.com/blusseau)** | `AsusSMC.kext` (Quản lý pin laptop ASUS, cảm biến, phím Fn) | [GitHub](https://github.com/blusseau/AsusSMC) |
-| **[CorpNewt](https://github.com/corpnewt)** | Bộ công cụ `GenSMBIOS`, `MountEFI`, `ProperTree`, `SSDTTime` | [GitHub](https://github.com/corpnewt) |
-| **[Dortania](https://dortania.github.io)** | Tài liệu hướng dẫn OpenCore và các bản vá DSDT | [Dortania Guides](https://dortania.github.io) |
+| **[OpenIntelWireless](https://github.com/OpenIntelWireless)** | `itlwm.kext` (driver Wi-Fi Intel) và ứng dụng `HeliPort` | [GitHub](https://github.com/OpenIntelWireless) |
+| **[VoodooI2C Team](https://github.com/VoodooI2C)** (Alexandred, hieplpvip, cholonam, benvs) | `VoodooI2C.kext` & `VoodooI2CHID.kext` (trackpad I2C Precision) | [GitHub](https://github.com/VoodooI2C) |
+| **[b00t0x](https://github.com/b00t0x)** | Bộ cài WhateverXe Graphics (tăng tốc Iris Xe) | [GitHub](https://github.com/b00t0x) |
+| **[1Revenger1](https://github.com/1Revenger1)** | `ECEnabler.kext` (bản vá pin Embedded Controller) | [GitHub](https://github.com/1Revenger1/ECEnabler) |
+| **[dhinakg](https://github.com/dhinakg)** | Driver `USBToolBox` và công cụ ánh xạ cổng | [GitHub](https://github.com/dhinakg/USBToolBox) |
+| **[blusseau](https://github.com/blusseau)** | `AsusSMC.kext` (pin, cảm biến và phím Fn cho laptop ASUS) | [GitHub](https://github.com/blusseau/AsusSMC) |
+| **[CorpNewt](https://github.com/corpnewt)** | Công cụ `GenSMBIOS`, `MountEFI`, `ProperTree`, `SSDTTime` | [GitHub](https://github.com/corpnewt) |
+| **[Dortania](https://dortania.github.io)** | Hướng dẫn cài đặt OpenCore và tài liệu | [Dortania Guides](https://dortania.github.io) |
 | **Apple Inc.** | Hệ điều hành macOS | [Apple](https://www.apple.com) |
 
 ---
 
 ## ⭐ Ủng hộ dự án
 
-Nếu bộ cài đặt EFI này giúp bạn cài đặt và chạy thành công macOS Sequoia trên chiếc ASUS VivoBook, hãy nhấn **Star ⭐** để lan tỏa dự án đến cộng đồng Hackintosh nhé!
+Nếu repository này giúp bạn chạy macOS Sequoia trên ASUS VivoBook, hãy **nhấn Star ⭐** để những người dùng Hackintosh khác dễ dàng tìm thấy dự án!
