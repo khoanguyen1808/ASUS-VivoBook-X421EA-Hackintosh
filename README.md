@@ -223,7 +223,7 @@ Special thanks to all developers and open-source contributors who made Hackintos
 | **[Acidanthera](https://github.com/acidanthera)** | OpenCorePkg, Lilu, AppleALC, VirtualSMC, CpuTscSync, NVMeFix, RestrictEvents, BrightnessKeys | [GitHub](https://github.com/acidanthera) |
 | **[OpenIntelWireless](https://github.com/OpenIntelWireless)** | `itlwm.kext` (Intel Wi-Fi driver) and `HeliPort` client | [GitHub](https://github.com/OpenIntelWireless) |
 | **[VoodooI2C Team](https://github.com/VoodooI2C)** (Alexandred, hieplpvip, cholonam, benvs) | `VoodooI2C.kext` & `VoodooI2CHID.kext` (I2C Precision Trackpad) | [GitHub](https://github.com/VoodooI2C) |
-| **[ChefKissInc](https://github.com/b00t0x)** | `WhateverXe.kext` & WhateverXe Graphics installer (Iris Xe acceleration) | [GitHub](https://github.com/b00t0x) |
+| **[b00t0x](https://github.com/b00t0x)** | WhateverXe Graphics installer (Iris Xe acceleration) | [GitHub](https://github.com/b00t0x) |
 | **[1Revenger1](https://github.com/1Revenger1)** | `ECEnabler.kext` (Embedded Controller Battery Fix) | [GitHub](https://github.com/1Revenger1/ECEnabler) |
 | **[dhinakg](https://github.com/dhinakg)** | `USBToolBox` driver and mapping tools | [GitHub](https://github.com/dhinakg/USBToolBox) |
 | **[blusseau](https://github.com/blusseau)** | `AsusSMC.kext` (ASUS Laptop SMC battery, sensors, Fn keys) | [GitHub](https://github.com/blusseau/AsusSMC) |
