@@ -37,7 +37,7 @@
 | **Storage** | Micron 2210 NVMe 512GB (`MTFDHBA512QFD`) | ✅ Working | `NVMeFix.kext` |
 | **Audio** | Realtek ALC256 (Speakers, Headphones, Mic) | ✅ Working | `AppleALC.kext` + `AsusSMC.kext` (Layout-ID 21/11) |
 | **Wi-Fi** | Intel Wi-Fi 6 AX201 160MHz | ✅ Working | `itlwm.kext` + **HeliPort** app |
-| **Bluetooth** | Intel AX201 Bluetooth | ⚠️ Partial | `IntelBluetoothFirmware` (keep disabled during installation) |
+| **Bluetooth** | Intel AX201 Bluetooth | ⚠️ Partial | `IntelBluetoothFirmware` (keep disabled during installation/may get stuck in the lockscreen, enabling isn't recommended) |
 | **Trackpad** | ASUS I2C Precision Multi-touch (`ASUE140C`) | ✅ Working | `VoodooI2C.kext` + `VoodooI2CHID.kext` + `SSDT-GPIO` |
 | **Keyboard** | PS/2 Keyboard + Function Fn Keys | ✅ Working | `VoodooPS2Controller.kext` + `BrightnessKeys.kext` |
 | **Battery & Sensors**| Battery Indicator, Power Adapter, Ambient Light | ✅ Working | `SMCBatteryManager`, `SMCLightSensor`, `AsusSMC` |
@@ -52,14 +52,13 @@ Restart laptop and press `F2` or `Delete` to enter BIOS Setup:
 
 ### 🔴 Disable
 * **Fast Boot**
+* **Vt-d**
 * **Secure Boot**
 * **Intel Platform Trust Technology (PTT)** *(optional, recommended if dual-booting)*
 * **VMD / Intel RST Storage Controller** *(Must be set to AHCI / NVMe Native Mode)*
 * **Wake on LAN / Network Stack**
 
 ### 🟢 Enable
-* **VT-x**
-* **VT-d**
 * **Above 4G Decoding**
 * **USB Legacy Support**
 * **DVMT Pre-Allocated: 64MB or higher**
