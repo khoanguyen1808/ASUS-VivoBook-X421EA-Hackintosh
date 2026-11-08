@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.apple.com/os/macos/"><img src="https://img.shields.io/badge/macOS-Sequoia%2015.x-black?style=flat-square&logo=apple&logoColor=white" alt="macOS Sequoia" /></a>
+  <a href="https://swcdn.apple.com/content/downloads/31/10/142-50013-A_0GMSQ8FVZX/kpmee5466o6dmojjdqw34x6ckj6b332of6/InstallAssistant.pkg"><img src="https://img.shields.io/badge/macOS-Sequoia%2015.x-black?style=flat-square&logo=apple&logoColor=white" alt="macOS Sequoia" /></a>
   <a href="https://github.com/acidanthera/OpenCorePkg"><img src="https://img.shields.io/badge/OpenCore-1.0.x-0969da?style=flat-square&logo=apple" alt="OpenCore" /></a>
   <a href="https://github.com/ChefKissInc/WhateverGreen"><img src="https://img.shields.io/badge/GPU-Iris%20Xe%201536MB%20(QE%2FCI)-success?style=flat-square&logo=intel" alt="Iris Xe" /></a>
   <a href="https://github.com/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh/stargazers"><img src="https://img.shields.io/github/stars/khoanguyen1808/ASUS-VivoBook-X421EA-Hackintosh?style=flat-square&color=yellow" alt="Stars" /></a>
